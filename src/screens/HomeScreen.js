@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -7,10 +7,59 @@ import {
   Pressable,
   StatusBar,
   TextInput,
-  SafeAreaView
+  SafeAreaView,
+  FlatList
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'All',
+    img: require('../../assets/all-png.png')
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Pizza',
+    img: require('../../assets/pizza-home.png')
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Cheesecake',
+    img: require('../../assets/cheesecake.png')
+  },
+  {
+    id: '58694a0f-3da1-471f-bd6-1471e29d72',
+    title: 'Cheesecake',
+    img: require('../../assets/cheesecake.png')
+  }
+]
+
+const Item = ({ title, img, isSelected, onSelect }) => (
+  <View>
+    <Pressable
+      style={[styles.item, isSelected && styles.selectedItem]}
+      onPress={onSelect}
+    >
+      <Image style={styles.image} source={img} resizeMode='contain' />
+    </Pressable>
+    <Text style={[styles.title, isSelected && styles.selectedTitle]}>
+      {title}
+    </Text>
+  </View>
+)
+
 const HomeScreen = () => {
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const renderItem = ({ item }) => (
+    <Item
+      title={item.title}
+      img={item.img}
+      isSelected={selectedItem === item.id}
+      onSelect={() => setSelectedItem(item.id)}
+    />
+  )
   const {
     container,
     navBar,
@@ -35,34 +84,29 @@ const HomeScreen = () => {
         <TextInput placeholder='Search' style={searchBar} />
       </View>
       {/* Food Section  */}
-      <View
-        style={{
-          flexDirection: 'column',
-          marginTop: 20,
-          justifyContent: 'center',
-          // alignItems: 'center'
-          marginLeft: 20,
-          borderWidth: 3,
-          borderColor: 'red'
-        }}
-      >
-        <View
-          style={{
-            padding: 20,
-            backgroundColor: '#EFEEEE',
-            borderRadius: 20,
-            width: 90,
-            height: 90,
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <Image
-            source={require('../../assets/cheesecake.png')}
-            resizeMode='contain'
-          />
+      <View style={styles.foodSection}>
+        <FlatList
+          data={DATA}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+        />
+      </View>
+      {/*Promotion Section Head */}
+      <View>
+        <Text>Promotions</Text>
+        <View>
+          <Text>Today’s Offer</Text>
+          <Text>Free box of Fries</Text>
+          <Text>on all orders above $150</Text>
+          <Text>Today’s Offer</Text>
+          <Text>Free box of Fries</Text>
+          <Text>on all orders above $150</Text>
+          <Text>Today’s Offer</Text>
+          <Text>Free box of Fries</Text>
+          <Text>on all orders above $150</Text>
         </View>
-        <Text style={{ textAlign: 'center' }}>All</Text>
       </View>
     </SafeAreaView>
   )
@@ -108,6 +152,35 @@ const styles = StyleSheet.create({
     padding: 50,
     backgroundColor: '#462B9C',
     borderRadius: 20
+  },
+  foodSection: {
+    // height: 100,
+    marginVertical: 10
+  },
+  item: {
+    marginHorizontal: 8,
+    backgroundColor: '#EEEEEE',
+    borderRadius: 20,
+    padding: 10,
+    marginTop: 30,
+    marginLeft: 20,
+    width: 80,
+    height: 80,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  selectedItem: {
+    backgroundColor: '#462B9C'
+  },
+  selectedTitle: {
+    color: '#462B9C'
+  },
+  title: {
+    marginTop: 8,
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#868585',
+    fontSize: 17
   }
 })
 export default HomeScreen
