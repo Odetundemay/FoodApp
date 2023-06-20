@@ -8,9 +8,12 @@ import {
   StatusBar,
   TextInput,
   SafeAreaView,
-  FlatList
+  FlatList,
+  ScrollView,
+  TouchableOpacity
 } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import { Feather, AntDesign } from '@expo/vector-icons'
+import Card from '../components/Card'
 
 const DATA = [
   {
@@ -20,17 +23,17 @@ const DATA = [
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Burger',
+    img: require('../../assets/burger_sandwich.png')
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
     title: 'Pizza',
     img: require('../../assets/pizza-home.png')
   },
   {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Cheesecake',
-    img: require('../../assets/cheesecake.png')
-  },
-  {
     id: '58694a0f-3da1-471f-bd6-1471e29d72',
-    title: 'Cheesecake',
+    title: 'Desert',
     img: require('../../assets/cheesecake.png')
   }
 ]
@@ -49,7 +52,7 @@ const Item = ({ title, img, isSelected, onSelect }) => (
   </View>
 )
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [selectedItem, setSelectedItem] = useState(null)
 
   const renderItem = ({ item }) => (
@@ -60,30 +63,22 @@ const HomeScreen = () => {
       onSelect={() => setSelectedItem(item.id)}
     />
   )
-  const {
-    container,
-    navBar,
-    heading,
-    profilePhotoSty,
-    searchBar,
-    searchSection,
-    sectionImagWrapper
-  } = styles
+
   return (
-    <SafeAreaView style={container}>
-      {/*Heading  */}
-      <View style={navBar}>
-        <Text style={heading}>Menu</Text>
-        <Pressable style={profilePhotoSty}>
+    <ScrollView style={styles.container}>
+      {/* Heading */}
+      <View style={styles.navBar}>
+        <Text style={styles.heading}>Menu</Text>
+        <Pressable style={styles.profilePhotoSty}>
           <Image source={require('../../assets/profile-photo.png')} />
         </Pressable>
       </View>
-      {/* Search Bar  */}
-      <View style={searchSection}>
+      {/* Search Bar */}
+      <View style={styles.searchSection}>
         <Feather name='search' size={24} color='#878686' />
-        <TextInput placeholder='Search' style={searchBar} />
+        <TextInput placeholder='Search' style={styles.searchBar} />
       </View>
-      {/* Food Section  */}
+      {/* Food Section */}
       <View style={styles.foodSection}>
         <FlatList
           data={DATA}
@@ -93,22 +88,40 @@ const HomeScreen = () => {
           renderItem={renderItem}
         />
       </View>
-      {/*Promotion Section Head */}
+      {/* Promotion Section Head */}
       <View>
-        <Text>Promotions</Text>
-        <View>
-          <Text>Today’s Offer</Text>
-          <Text>Free box of Fries</Text>
-          <Text>on all orders above $150</Text>
-          <Text>Today’s Offer</Text>
-          <Text>Free box of Fries</Text>
-          <Text>on all orders above $150</Text>
-          <Text>Today’s Offer</Text>
-          <Text>Free box of Fries</Text>
-          <Text>on all orders above $150</Text>
+        <Text style={styles.promotionSectionHead}>Promotions</Text>
+        <View style={styles.promotionCard}>
+          <View style={styles.promotionCardTxtContainer}>
+            <Text style={styles.promotionCardTxt}>Today’s Offer</Text>
+            <Text style={[styles.promotionCardTxt, styles.promotionCardTxtBig]}>
+              Free box of Fries
+            </Text>
+            <Text style={styles.promotionCardTxt}>
+              on all orders above $150
+            </Text>
+          </View>
+          <Image
+            source={require('../../assets/French-fries.png')}
+            resizeMode='contain'
+            style={styles.promotionCardImage}
+          />
         </View>
       </View>
-    </SafeAreaView>
+      {/* Popular section */}
+      <Text style={styles.popularSectionHead}>Popular</Text>
+      <View style={styles.popularSection}>
+        <Card
+          title={'Beef Burger'}
+          img={require('../../assets/burger_sandwichB.png')}
+          onPress={() => navigation.navigate('Cart')}
+        />
+        <Card
+          title={'Pizza Fries'}
+          img={require('../../assets/Pizza-friesB.png')}
+        />
+      </View>
+    </ScrollView>
   )
 }
 
@@ -116,13 +129,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FDFCFF',
-    paddingTop: StatusBar.currentHeight || 0
+    paddingTop: StatusBar.currentHeight || 30
   },
   navBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 28
+    padding: 28,
+    paddingTop: 10
   },
   heading: {
     fontSize: 42,
@@ -148,13 +162,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 28,
     alignItems: 'center'
   },
-  sectionImagWrapper: {
-    padding: 50,
-    backgroundColor: '#462B9C',
-    borderRadius: 20
-  },
   foodSection: {
-    // height: 100,
     marginVertical: 10
   },
   item: {
@@ -181,6 +189,50 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#868585',
     fontSize: 17
+  },
+  promotionSectionHead: {
+    marginLeft: 28,
+    marginVertical: 15,
+    fontSize: 24,
+    color: '#101010'
+  },
+  promotionCardTxtContainer: {
+    marginRight: 20
+  },
+  promotionCard: {
+    flexDirection: 'row',
+    backgroundColor: '#9577F2',
+    padding: 15,
+    marginHorizontal: 28,
+    borderRadius: 20,
+    justifyContent: 'space-between'
+  },
+  promotionCardTxt: {
+    color: '#FFFBFB',
+    fontSize: 16,
+    paddingBottom: 10
+  },
+  promotionCardTxtBig: {
+    fontSize: 20,
+    fontWeight: '700'
+  },
+  promotionCardImage: {
+    width: 80,
+    height: 100,
+    alignSelf: 'center'
+  },
+  popularSectionHead: {
+    marginLeft: 28,
+    marginTop: 15,
+    fontSize: 24,
+    color: '#010101'
+  },
+  popularSection: {
+    flexDirection: 'row',
+    margin: 20,
+    borderRadius: 30,
+    justifyContent: 'space-between'
   }
 })
+
 export default HomeScreen
