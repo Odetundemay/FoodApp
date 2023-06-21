@@ -1,30 +1,26 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 const CustomButton = (props) => {
-  const { button, onPress, buttonTxt } = styles
-  const { title } = props
+  const { button, buttonTxt } = styles
+  const { title, onPress } = props
   return (
-    <View>
-      <TouchableOpacity style={button} onPress={onPress}>
-        <Text style={buttonTxt}>{title}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity style={button} onPress={onPress}>
+      <Text style={buttonTxt}>{title}</Text>
+    </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   button: {
+    backgroundColor: '#462C9C',
+    borderRadius: 10,
     paddingVertical: 15,
-    paddingHorizontal: 25,
-    backgroundColor: '#462B9C',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 20
+    marginTop: 20
   },
   buttonTxt: {
-    textAlign: 'center',
-    fontSize: 27,
-    color: 'white',
-    fontWeight: '600'
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold'
   }
 })
 export default CustomButton

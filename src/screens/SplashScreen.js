@@ -5,7 +5,7 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={container}>
       <Image
-        source={require('../../assets/get-started.jpg')}
+        source={require('../../assets/get-started.png')}
         style={image}
         resizeMode='contain'
       />
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    borderRadius: 345
+    borderRadius: 345,
+    width: '80%',
+    height: '50%'
   },
   splashText: {
     fontSize: 42,

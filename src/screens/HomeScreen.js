@@ -7,12 +7,11 @@ import {
   Pressable,
   StatusBar,
   TextInput,
-  SafeAreaView,
   FlatList,
-  ScrollView,
-  TouchableOpacity
+  ScrollView
 } from 'react-native'
-import { Feather, AntDesign } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 import Card from '../components/Card'
 
 const DATA = [
@@ -63,9 +62,8 @@ const HomeScreen = ({ navigation }) => {
       onSelect={() => setSelectedItem(item.id)}
     />
   )
-
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Heading */}
       <View style={styles.navBar}>
         <Text style={styles.heading}>Menu</Text>
@@ -116,6 +114,7 @@ const HomeScreen = ({ navigation }) => {
           img={require('../../assets/burger_sandwichB.png')}
           onPress={() => navigation.navigate('Cart')}
         />
+
         <Card
           title={'Pizza Fries'}
           img={require('../../assets/Pizza-friesB.png')}
@@ -228,10 +227,11 @@ const styles = StyleSheet.create({
     color: '#010101'
   },
   popularSection: {
+    marginTop: 15,
+    paddingHorizontal: 20,
     flexDirection: 'row',
-    margin: 20,
-    borderRadius: 30,
-    justifyContent: 'space-between'
+    justifyContent: 'space-around',
+    borderRadius: 20
   }
 })
 

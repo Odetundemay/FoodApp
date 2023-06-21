@@ -7,7 +7,8 @@ const Card = (props) => {
     <View
       style={{
         padding: 15,
-        backgroundColor: '#EBE8E8'
+        backgroundColor: '#EBE8E8',
+        borderRadius: 20
       }}
     >
       <Image source={img} style={imageSty} resizeMode='contain' />
@@ -40,8 +41,8 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   imageSty: {
-    height: 100,
-    width: 100
+    height: 80,
+    width: 80
   }
 })
 export default Card

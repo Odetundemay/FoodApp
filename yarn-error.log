@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn
+  /usr/local/bin/node /usr/local/bin/yarnpkg install
 
 PATH: 
-  /usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/odetunde/Library/Application Support/cloud-code/installer/google-cloud-sdk/bin:/Applications/Postgres.app/Contents/Versions/15/bin:/Applications/Postgres.app/Contents/Versions/15/bin
+  /Users/odetunde/node_modules/.bin:/Users/odetunde/Desktop/Reaact Native/FoodApp/node_modules/.bin:/Users/odetunde/Desktop/Reaact Native/node_modules/.bin:/Users/odetunde/Desktop/node_modules/.bin:/Users/odetunde/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/odetunde/Library/Application Support/cloud-code/installer/google-cloud-sdk/bin:/Applications/Postgres.app/Contents/Versions/15/bin:/Applications/Postgres.app/Contents/Versions/15/bin
 
 Yarn version: 
   1.22.19
